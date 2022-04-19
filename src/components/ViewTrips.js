@@ -34,8 +34,8 @@ const Booktrip = () =>{
             </div>
             <div>
                 <div className='row'>
-                    <table className='table table-stripped table-bordered'>
-                        <thead>
+                    <table className='table table-bordered table-striped'>
+                        <thead className="thead-dark">
                            
                             <tr>
                                 <th>tripBooking Id</th>
@@ -78,6 +78,7 @@ const Booktrip = () =>{
             </div>
 
     </div>
+        
     )
 }
 export default Booktrip;

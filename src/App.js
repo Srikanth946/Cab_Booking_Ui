@@ -9,7 +9,7 @@ import Routes from './routes/Routes'
 function App() {
   return (
     <div className="App">
-      <h1>Cab Service Application</h1>
+      <h1>JetAyu</h1>
       <Routes/>
     </div>
   );

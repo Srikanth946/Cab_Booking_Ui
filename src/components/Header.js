@@ -9,6 +9,7 @@ const Header = ()=>{
                         <img src="https://cdn5.vectorstock.com/i/1000x1000/68/44/car-logo-with-circle-hand-colorful-logo-vector-22266844.jpg"
                             height="60px" width="60px" alt="Cab Logo" />
                         </Link>
+                        <h6 className="text-secondary">Trip on your tip</h6>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -21,7 +22,7 @@ const Header = ()=>{
                                 <a className="nav-link">Updatetrip</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link">Stoptrip</a>
+                                <Link className="nav-link" to="/endTrip">Endtrip</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/view">Viewtrip</Link>

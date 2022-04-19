@@ -44,3 +44,12 @@ footer {
   height:60px;   /* Height of the footer */
   background:#6cf;
 }
+
+#bookcabcard{
+  border: 2px solid darkgray;
+  border-radius: 20px;
+}
+#endtripcard{
+  border: 2px solid darkgray;
+  border-radius: 20px;
+}
