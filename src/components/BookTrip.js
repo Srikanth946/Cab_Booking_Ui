@@ -1,11 +1,22 @@
-import {bookCab, updateTrip,viewTrip,endTrip} from '../services/TripService'
+import {bookCabService, updateTripService,viewTripService,endTripService} from '../services/TripService'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Dropdown from 'react-bootstrap/Dropdown'
 import { useState } from "react";
+import Trip from '../Model/Trip';
+import  { setTripList, getTripsList } from '../redux/TripSlice'
+import { useDispatch, useSelector } from "react-redux";
+
 const Booktrip = () =>{
     const[booktrip, setBookTrip]= useState({
         fromLocation:'',
-        toLocation:''
+        toLocation:'',
+        cabType:''
     });
-    const [tripdata, setTripdata]= useState([]);
+    // const [tripdata, setTripdata]= useState(new Trip() );
+    const TripListStore = useSelector((state) => state.Trip.TripList);
+    const dispatch = useDispatch();
     const addTrip=(e)=>{
         console.log(e.target.value);
         setBookTrip({
@@ -14,18 +25,23 @@ const Booktrip = () =>{
         
     }
 
+    const addType=(e)=>{
+        console.log(e.target.value);
+        setBookTrip({...booktrip,[booktrip.cabType]:e.target.value});
+    }
+
     const addCab = (e) =>{
+        console.log(booktrip.cabType)
         e.preventDefault();
-        console.log(booktrip.fromLocation);
-        console.log(booktrip.toLocation);
+        // console.log(booktrip);
         let tripDetails = { ...booktrip}
-        bookCab(tripDetails).then((response)=>{
-                console.loge(response.data.value);
-                setTripdata(response.data);
+        bookCabService(tripDetails).then((response)=>{
+                // console.loge(response.data.value);
+                dispatch( setTripList(response.data));
+                // setTripdata(response.data);
                 alert("Cab Booked Succesfully")
             })
             .catch(()=>{
-               
                 alert("Cab could not be booked")
 
             })
@@ -34,7 +50,7 @@ const Booktrip = () =>{
 
     const endCab= (e) =>{
         e.preventDefault();
-        endTrip().then((response)=>{
+        endTripService().then((response)=>{
             console.log(booktrip.fromLocation+"  ended");
             console.log(response);
             console.log(response.data.customer.userName);
@@ -52,7 +68,7 @@ const Booktrip = () =>{
         <div>
             <div className="container">
                 <div className="row">
-                    <div id ="bookcabcard" className="card col-md-6 offset-md-3 offset-md-3 text-center mt-5">
+                    <div id ="bookcabcard" className="card col-md-6 offset-md-3 offset-md-3 text-center mt-5 mb-5">
                         <h3 className="text-center card-header mt-2">Enter Trip details</h3>
                         <div className="card-body">
                             <form>
@@ -75,9 +91,19 @@ const Booktrip = () =>{
                                         value={booktrip.toLocation}
                                         onChange={addTrip}
                                     />
+                                    <div className='mt:5'>
+                                        <label className='card-title'>Select Cab Type</label>
+                                    <select className="form-select  mt:5"  value={booktrip.cabType} onChange={addTrip} name="cabType" title="select">
+                                        <option selected >Auto</option>
+                                        <option>Mini</option>
+                                        <option>Luxury</option>
+                                    </select>
+                                    </div>
                                     <input
                                         type="submit"
                                         className="btn btn-primary form-control mb-3 mt-3"
+                                        data-toggle="collapse"
+                                        data-target="#data"
                                         value="Book Cab"
                                         onClick={addCab}
                                     />
@@ -86,6 +112,14 @@ const Booktrip = () =>{
                                 </div>
                             </form>
 
+                        </div>
+                        <div id="data" class="collapse">
+                        <p className="text-primary text-center font-weight-bold lead  collapse">Trip Booking Details</p>
+                        <p>FromLocation : {TripListStore.fromLocation}</p>
+                        <p>ToLocation :{TripListStore.toLocation}</p>
+                        <p>BookedTime :{TripListStore.fromDateTime}</p>
+                        {/* <p>Cab Type:{TripListStore.driver.cab.cabType}</p> */}
+                        {/* <p>Bill:{TripListStore.driver.cab.bill}</p> */}
                         </div>
 
                     </div>

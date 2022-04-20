@@ -1,7 +1,10 @@
 class driver{
 
     driverId;
-    driverrating;
+    licenseNo;
+    rating;
+    cab;
+    status;
 
 }
 

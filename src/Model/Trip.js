@@ -2,10 +2,16 @@ import driver from './driver'
 class Trip {
 
     tripBookingId;
+    customer ={};
+    driver= new driver();
     FromLocation;
     ToLocation;
+    fromDateTime;
+    toDateTime;
+    status;
+    distanceInKm;
     Bill;
-    driver= new driver();
+    
 }
 
 export default Trip;

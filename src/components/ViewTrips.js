@@ -1,19 +1,24 @@
 import { useState } from "react";
 import Trip from '../Model/Trip';
 import driver from '../Model/driver';
-import {bookCab, updateTrip,viewTrip,endTrip} from '../services/TripService'
+import {bookCabService, updateTripService,viewTripService,endTripService} from '../services/TripService'
+import  { setTripList, getTripsList } from '../redux/TripSlice'
+import { useDispatch, useSelector } from "react-redux";
 
 const Booktrip = () =>{
     const[trip, setTrip]=useState([]);
     const[id,setId]=useState('');
 
+    const dispatch = useDispatch();
+    const TripsListStore = useSelector((state) => state.Trip.TripsList);
     const submitGetTripById = (evt) => {
-        console.log(evt.data);
+        // console.log(evt.data);
         evt.preventDefault();
-        viewTrip()
+        viewTripService()
             .then((response) => {
-                console.log(response.data);
-                setTrip(response.data);
+                // console.log(response.data);
+                dispatch(getTripsList(response.data));
+                // setTrip(response.data);
             })
             .catch((error) => {
                 alert(error);
@@ -26,7 +31,7 @@ const Booktrip = () =>{
     }
 
     return(
-        <div class='container' >
+        <div className='container' >
             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-10">
             <p>View Trip History</p>
             <div className="form form-group" >
@@ -52,7 +57,7 @@ const Booktrip = () =>{
                       </thead>
                       <tbody>
                           {
-                              trip.map((e)=>
+                              TripsListStore.map((e)=>
                               <tr key={e.tripBookingId}>
                                   <td>{e.tripBookingId}</td>
                                   <td>{e.fromLocation}</td>

@@ -1,10 +1,10 @@
-import {bookCab, updateTrip,viewTrip,endTrip} from '../services/TripService'
+import {bookCabService, updateTripService,viewTripService,endTripService} from '../services/TripService'
 
 const EndTrip = () =>{
 
     const endCab= (e) =>{
         e.preventDefault();
-        endTrip().then((response)=>{
+        endTripService().then((response)=>{
             // console.log(booktrip.fromLocation+"  ended");
             console.log(response);
             console.log(response.data.customer.userName);

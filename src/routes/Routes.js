@@ -4,6 +4,7 @@ import ViewTrips from '../components/ViewTrips';
 
 import Booktrip from '../components/BookTrip';
 import EndTrip from '../components/EndTrip';
+import Footer from '../components/Footer';
 
 
 const Routes = () =>{
@@ -19,6 +20,7 @@ const Routes = () =>{
                             <Route path="/endTrip"><EndTrip/></Route>
                         </Switch>
                     </div>
+                    <Footer/>
                 </div>
             </Router>
         </div>
