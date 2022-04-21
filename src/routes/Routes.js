@@ -20,7 +20,7 @@ const Routes = () =>{
                             <Route path="/endTrip"><EndTrip/></Route>
                         </Switch>
                     </div>
-                    <Footer/>
+                    {/* <Footer/> */}
                 </div>
             </Router>
         </div>

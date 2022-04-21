@@ -1,6 +1,9 @@
 import {bookCabService, updateTripService,viewTripService,endTripService} from '../services/TripService'
+import { useDispatch, useSelector } from "react-redux";
 
 const EndTrip = () =>{
+    const TripListStore = useSelector((state) => state.Trip.TripList);
+
 
     const endCab= (e) =>{
         e.preventDefault();
@@ -18,24 +21,39 @@ const EndTrip = () =>{
     return(
         <div className="container">
             <div className="row">
-                <div id ="endtripcard"className="card col-md-6 offset-md-3 offset-md-3 text-center mt-5">
-                    <h3 className="text-center card-header mt-2">EndTrip</h3>
-                    <div className="card-body">
+                <div class="position-relative">
+                    <div class="position-absolute top-0 end-0 mt-2 mr-2">
                         <input
-                            type="submit"
-                            className="btn btn-primary form-control mb-3 mt-3"
-                            value="End Trip"
-                            onClick={endCab}
-                        />
+                        type="submit"
+                        className='btn btn-success '
+                        value="End Trip"
+                        onClick={endCab}
 
+                        />
                     </div>
 
                 </div>
 
 
+
+                <div class=" card col-md-10 text-left mt-5 rounded">
+                        <h4 class="card-header text-center">Booking Details</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">FromLocation :{TripListStore.fromLocation}</li>
+                            <li class="list-group-item">ToLocation :{TripListStore.toLocation}</li>
+                            <li class="list-group-item">Bill: {TripListStore.bill}</li>
+                            <li class="list-group-item">BookedTime :{TripListStore.fromDateTime}</li>
+                        </ul>
+                </div>
+
+            
+
+
             </div>
 
         </div>
+
+
     )
 }
 
